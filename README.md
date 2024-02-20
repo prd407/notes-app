@@ -6,7 +6,7 @@
 ## run this line  to start the flask server on local host
  python app.py
 
-### about the files and flow
+## about the files and flow
 app.py file has flask code, api endpoints.
 
 test.ipynb file has some example requests to test the endpoints.
