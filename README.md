@@ -1,10 +1,11 @@
 # notes-app
 
-run this to intsall requirements in not installed previously
-## pip install - r requirements
+## run this to intsall requirements in not installed previously
+ pip install - r requirements
 
-run this line  to start the flask server on local host
-## python app.py
+## run this line  to start the flask server on local host
+ python app.py
+
 
 app.py file has flask code, api endpoints.
 
