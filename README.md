@@ -1,11 +1,14 @@
 # notes-app
 
 ## run this to intsall requirements in not installed previously
+```bash
  pip install - r requirements
+```
 
 ## run this line  to start the flask server on local host
+``` bash 
  python app.py
-
+```
 ## about the files and flow
 app.py file has flask code, api endpoints.
 
@@ -29,7 +32,12 @@ app.py has comments in endpoints to explain what the codes does
 | `email` | `string` | **Required**. Email |
 | `password` | `string` | **Required**. Password |
 
-``` example response {"message":"Username or email already exists"}```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `message` | `string` | Error or Confirmation message |
+| `user_id` | `string` | user_id if successful |
+| `errors` | `string` | error description |
 
 #### login endpoint
 ```http
@@ -40,7 +48,12 @@ app.py has comments in endpoints to explain what the codes does
 | `email`      | `string` | **Required**. Email |
 | `password`      | `string` | **Required**. Password |
 
-```example response {"message":"Login successful","token":"token_string"}```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `message` | `string` | Error or Confirmation message |
+| `token` | `string` | token generated |
+| `errors` | `string` | error description |
 
 #### create new note 
 ```http
@@ -55,7 +68,12 @@ app.py has comments in endpoints to explain what the codes does
 | :-------- | :------- | :-------------------------------- |
 | `Authorization`| `Bearer token` | **Required**. Token from login |
 
-```example response {"message":"Note created successfully","note_id":"65d4f950a4b7ca8d7c830e3f"}```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `message` | `string` | Error or Confirmation message |
+| `note_id` | `string` | note_id generated |
+| `errors` | `string` | error description |
 
 ### update note
 ```http
@@ -70,7 +88,11 @@ app.py has comments in endpoints to explain what the codes does
 | :-------- | :------- | :-------------------------------- |
 | `Authorization`| `Bearer token` | **Required**. Token from login |
 
-```example response {"message":"Note updated successfully"}```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `message` | `string` | Error or Confirmation message |
+| `errors` | `string` | error description |
 
 ### get note endpoint
 ```http
@@ -80,7 +102,12 @@ app.py has comments in endpoints to explain what the codes does
 | :-------- | :------- | :-------------------------------- |
 | `Authorization`| `Bearer token` | **Required**. Token from login |
 
-```example response {"content":"biscut are sweet, it is important","title":"note biscuts"}```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `title` | `string` | note title |
+| `content` | `string` | note content |
+
 
 ### share note to other user
 ```http
@@ -88,14 +115,20 @@ app.py has comments in endpoints to explain what the codes does
 ```
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `note_id`      | `string` | **Required**. note_id to be shared |
-| `user_ids`      | `list` | **Required**. user_ids to be assign  |
+| `note_id` | `string` | **Required**. note_id to be shared |
+| `user_ids` | `list` | **Required**. user_ids to be assign  |
 
 | Header | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `Authorization`| `Bearer token` | **Required**. Token from login |
 
-```example response {"message":"Note shared successfully","note_id":"65d4f950a4b7ca8d7c830e3f","user_ids":"['65d4946c809e8192877a32d5']"}```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `message` | `string` | Error or Confirmation message |
+| `errors` | `string` | error description |
+| `note_id` | `string` | note_id generated |
+| `user_ids` | `list` | list of user_ids |
 
 ### notes version history endpoint
 ```http
@@ -105,4 +138,12 @@ app.py has comments in endpoints to explain what the codes does
 | :-------- | :------- | :-------------------------------- |
 | `Authorization`| `Bearer token` | **Required**. Token from login |
 
-```example response [{"modified_at":"2024-02-20 20:15:11.240000","modified_by":"65d490bf809e8192877a32d4","note":"{'title': 'test note', 'content': 'note data is nice', '_id': ObjectId('65d4baf7e0b3db9cc0614149')}","note_id":"65d4baf7e0b3db9cc0614149","version":"1"},{"modified_at":"2024-02-20 20:33:33.921000","modified_by":"65d490bf809e8192877a32d4","note":"{'title': 'updated note 3', 'content': 'notes has updated data'}","note_id":"65d4baf7e0b3db9cc0614149","version":"2"},{"modified_at":"2024-02-21 00:42:32.126000","modified_by":"65d490bf809e8192877a32d4","note":"{'title': 'update biscut', 'content': 'notes has updated data'}","note_id":"65d4baf7e0b3db9cc0614149","version":"3"}]```
+response
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `message` | `string` | Error or Confirmation message |
+| `modified_at` | `string` | last modified timestamp |
+| `modified_by` | `string` | user_id of user who modified |
+| `note` | `dict` | note description |
+| `note_id` | `string` | note_id |
+| `version` | `int` | note version |
